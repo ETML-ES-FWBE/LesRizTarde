@@ -1,0 +1,15 @@
+@startuml
+actor User
+participant "GradeController" as GradeController
+participant "GradeService" as GradeService
+participant "GradeRepository" as GradeRepository
+
+User -> GradeController: PUT /grades/{id} (updated grade)
+GradeController -> GradeService: updateGrade(id, updated grade)
+GradeService -> GradeRepository: findById(id)
+GradeRepository --> GradeService: Grade found
+GradeService -> GradeRepository: save(updated grade)
+GradeRepository --> GradeService: Grade updated
+GradeService --> GradeController: Return updated grade
+GradeController --> User: Response (200 OK with updated grade)
+@enduml

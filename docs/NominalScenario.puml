@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "GradeController" as GradeController
+participant "GradeService" as GradeService
+participant "GradeRepository" as GradeRepository
+
+User -> GradeController: POST /grades (new grade)
+GradeController -> GradeService: createGrade(new grade)
+GradeService -> GradeRepository: save(new grade)
+GradeRepository --> GradeService: Grade saved
+GradeService --> GradeController: Return saved grade
+GradeController --> User: Response (201 Created)
+@enduml

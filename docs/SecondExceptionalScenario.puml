@@ -1,0 +1,14 @@
+@startuml
+actor User
+participant "GradeController" as GradeController
+participant "GradeService" as GradeService
+participant "GradeRepository" as GradeRepository
+participant "StudentRepository" as StudentRepository
+
+User -> GradeController: POST /grades (valid grade, but student does not exist)
+GradeController -> GradeService: createGrade(valid grade)
+GradeService -> StudentRepository: findById(studentId)
+StudentRepository --> GradeService: Student not found (null)
+GradeService --> GradeController: Throw Exception (404 Not Found)
+GradeController --> User: Response (404 Not Found) with error message
+@enduml

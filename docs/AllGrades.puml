@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "GradeController" as GradeController
+participant "GradeService" as GradeService
+participant "GradeRepository" as GradeRepository
+
+User -> GradeController: GET /grades (studentId)
+GradeController -> GradeService: getAllGradesByStudent(studentId)
+GradeService -> GradeRepository: findByStudentId(studentId)
+GradeRepository --> GradeService: List of grades
+GradeService --> GradeController: Return list of grades
+GradeController --> User: Response (200 OK with grades)
+@enduml

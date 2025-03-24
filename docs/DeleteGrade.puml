@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "GradeController" as GradeController
+participant "GradeService" as GradeService
+participant "GradeRepository" as GradeRepository
+
+User -> GradeController: DELETE /grades/{id} (grade to delete)
+GradeController -> GradeService: deleteGrade(id)
+GradeService -> GradeRepository: deleteById(id)
+GradeRepository --> GradeService: Grade deleted
+GradeService --> GradeController: Return success message
+GradeController --> User: Response (200 OK with success message)
+@enduml

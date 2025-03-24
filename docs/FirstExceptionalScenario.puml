@@ -1,0 +1,12 @@
+@startuml
+actor User
+participant "GradeController" as GradeController
+participant "GradeService" as GradeService
+participant "GradeRepository" as GradeRepository
+
+User -> GradeController: POST /grades (invalid grade)
+GradeController -> GradeService: createGrade(invalid grade)
+GradeService -> GradeService: Validate grade (check if grade between 1 and 6)
+GradeService --> GradeController: Throw Exception (400 Bad Request)
+GradeController --> User: Response (400 Bad Request) with error message
+@enduml
