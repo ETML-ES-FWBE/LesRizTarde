@@ -1,35 +1,20 @@
 @startuml
+skinparam style strictuml
 
-skinparam classAttributeIconSize 0
+package "Data Layer" {
+  class Student {
+    + id : Long
+    + firstName : String
+    + lastName : String
+  }
 
-' Classes declaration
+  class Grade {
+    + id : Long
+    + grade : int (1 to 6)
+    + studentId : Long
+  }
 
-package "Controllers"{
-    class EmployeeController(){}
-    class EmployeeNotFoundAdvice()
-    class EmployeeNotFoundException()
-
-    class DepartmentController(){}
-    class DepartmentNotFoundAdvice(){}
-    class DepartmentNotFoundException(){}
 }
 
-package "Entities"{
-    class Employee()
-    class Department()
-}
-
-package "Repositories"{
-    class EmployeeRepository()
-    class DepartmentRepository()
-    class LoadDatabase()
-}
-
-class PayrollApplication
-
-' Relations
-
-
-
-
+Grade --> Student : "belongs to"
 @enduml
