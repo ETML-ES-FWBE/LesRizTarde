@@ -1,7 +1,7 @@
 @startuml
 skinparam style strictuml
 
-package "Data Layer" {
+package "Data Layer " {
   class Student {
     + id : Long
     + firstName : String
