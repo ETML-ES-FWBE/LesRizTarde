@@ -1,38 +1,77 @@
-s# Exam training
+## Table des matières
 
-This repository has been created as a learning tool for getting to grips with spring boot.
+1. [🚀 À propos](#-à-propos)
+2. [🎓 Prérequis](#-prérequis)
+3. [📝 Exécuter le projet](#-exécuter-le-projet)
+4. [📚 Documentation](#-documentation)
+    - [Accéder à l'application](#accéder-à-lapplication)
 
-## First build
 
-After cloning this repository, run this command:
+## 🚀 À propos
+
+Cette application de gestion des étudiants et des notes, construite avec **Spring Boot** et **MySQL**, permet de gérer les informations des étudiants et leurs notes à travers une API RESTful. Il est également possible de déployer l'application via **Docker** pour la gestion des environnements et l'intégration continue.
+
+
+## 🎓 Prérequis
+Avant de commencer, assurez-vous d'avoir installé et configuré les outils suivants :
+
+- **JDK 11 ou supérieur**
+- **Maven** pour la gestion des dépendances
+- **Docker** pour la gestion des conteneurs et la mise en place de la base de données MySQL
+- **IDE (IntelliJ IDEA, Eclipse, VS Code, etc.)** pour le développement Java
+
+
+## 📝 Exécuter le projet
+
+Pour compiler et exécuter le projet avec Docker, suivez ces étapes :
+
+```shell
+# Ouvrir un terminal (Invite de commandes ou PowerShell sur Windows, Terminal sur macOS ou Linux)
+
+# Assurez-vous que Git est installé
+
+# Cloner le repository
+git clone https://github.com/ETML-ES-FWBE/LesRizTarde.git
+
+# Naviguer dans le dossier du projet
+cd LesRizTarde
+
+# Démarrer le Docker Engine
+
+# Lancer la commande Docker Compose pour construire et démarrer tous les services
+docker-compose up --build
+
+# Accéder au conteneur MySQL et ouvrir une session interactive
+docker exec -it spring-boot-mysql mysql -u root -p
 
 ```
-   mvn clean spring-boot:run
+
+## 📚 Documentation
+
+### Accéder à l'application
+Une fois les conteneurs en cours d'exécution, vous pouvez accéder à l'API REST via http://localhost:8080. Vous pouvez tester les différentes méthodes **GET, POST, PUT,** et **DELETE** pour manipuler les entités comme Student et Grade.
+
+Exemple de requête curl :
+```shell
+#Récupérer toutes les notes
+curl -X GET http://localhost:8080/grades
 ```
 
-to retrieve the dependencies, compile and run the program for the first time.
+## 🏗 Architecture du Projet
 
-```
-  [...]
-  2024-04-09T21:27:27.338+02:00  INFO 21340 --- [payroll] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-  2024-04-09T21:27:27.517+02:00  WARN 21340 --- [payroll] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be per
-  formed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-  2024-04-09T21:27:27.752+02:00  INFO 21340 --- [payroll] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-  2024-04-09T21:27:27.760+02:00  INFO 21340 --- [payroll] [           main] ch.etmles.payroll.PayrollApplication     : Started PayrollApplication in 2.972 seconds (process running for 3.247)
-  2024-04-09T21:27:27.802+02:00  INFO 21340 --- [payroll] [           main] c.e.payroll.Repositories.LoadDatabase    : Preloading Employee{id=1, name='Bilbo Baggins', role='burglar'}
-  2024-04-09T21:27:27.803+02:00  INFO 21340 --- [payroll] [           main] c.e.payroll.Repositories.LoadDatabase    : Preloading Employee{id=2, name='Frodo Baggins', role='thief'}
-  [...]
-```
+### 📂 Organisation des packages
+Config/ → Contient DataLoader.java pour le chargement initial des données.
 
-## Test using http requests
+Controllers/ → Gère les requêtes HTTP et les réponses.
 
-Got the file [project]\src\main\java\ch\etmles\payroll\Controllers\EmployeeController.java
+Entities/ → Définit les modèles de données (Student, Grade).
 
-Before all routes, you will find a curl sample.
+Exceptions/ → Gère les exceptions personnalisées (GradeNotFoundException.java, StudentNotFoundException.java).
 
-## Backlog
+Repositories/ → Interfaces JPA pour la gestion des bases de données.
 
-Read the different issues that are present. They describe the branch to be used for the starting point and the expected result.
+Services/ → Contient la logique métier (gestion des étudiants et des notes).
 
-[Issues](https://github.com/ETML-ES-FWBE/exam-training/issues)
+PayrollApplication.java → Point d’entrée de l’application.
 
+[Back to top](#top)
